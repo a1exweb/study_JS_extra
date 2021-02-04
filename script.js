@@ -29,7 +29,6 @@ function getNumber() {
                 getNumberQuestion();
             } else if (+number === numberBot) {
                 if (confirm('Поздравляю, Вы угадали!!! Хотели бы сыграть еще?')) {
-                    count = 2;
                     getNumber();
                 }
             }
