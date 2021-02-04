@@ -6,7 +6,7 @@ const isNumber = function(n) {
 
 
 function getNumber() {
-    let count = 2;
+    let count = 10;
     let numberBot = Math.floor(Math.random() * 100);
     console.log(`Загаданное число: ${numberBot}`);
 
