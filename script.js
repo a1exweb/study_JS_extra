@@ -4,27 +4,45 @@ const isNumber = function(n) {
     return !isNaN(parseFloat(n) && isFinite(n));
 };
 
-const numberUser = 50;
 
-function getNumberQuestion(number) {
-    number = prompt('Угадай число от 1 до 100');
+function getNumber() {
+    let count = 2;
+    let numberBot = Math.floor(Math.random() * 100);
+    console.log(`Загаданное число: ${numberBot}`);
 
-    if (number === null) {
-        alert('Игра окончена');
-        return;
-    } else if (!isNumber(number) || number === '') {
-        alert('Введи число!');
-        getNumberQuestion();
-    } else if (+number > numberUser) {
-        alert('Загаданное число меньше');
-        getNumberQuestion();
-    } else if (+number < numberUser) {
-        alert('Загаданное число больше');
-        getNumberQuestion();
-    } else if (+number === numberUser) {
-        alert('Поздравляю, Вы угадали!!!');
-        return;
+    function getNumberQuestion (number) {
+        if (count > 0) {
+            number = prompt('Угадай число от 1 до 100');
+            if (number === null) {
+                alert('Игра окончена');
+                return;
+            } else if (!isNumber(number) || number === '') {
+                alert('Введи число!');
+                getNumberQuestion();
+            } else if (+number > numberBot) {
+                count--;
+                alert(`Загаданное число меньше, осталось попыток ${count}`);
+                getNumberQuestion();
+            } else if (+number < numberBot) {
+                count--;
+                alert(`Загаданное число больше, осталось попыток ${count}`);
+                getNumberQuestion();
+            } else if (+number === numberBot) {
+                if (confirm('Поздравляю, Вы угадали!!! Хотели бы сыграть еще?')) {
+                    count = 2;
+                    getNumber();
+                }
+            }
+        } else {
+            let tryAgain = confirm('Попытки закончились, хотите сыграть ещё?');
+            if (tryAgain === true) {
+                getNumber();
+            } else {
+                return;
+            }
+        }
     }
-};
+    getNumberQuestion();
+}
 
-getNumberQuestion(numberUser);
+getNumber();
